@@ -9,6 +9,7 @@
 
     </head>
     <body>
+
         <!---hero Section start-->
         <div class="hero">
             <nav>
@@ -16,9 +17,9 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About Me</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Skills</a></li>
-                    <li><a href="#">Contact Me</a></li>
+                    <li><a href="#">The Singer</a></li>
+                    <li><a href="#">The Student</a></li>
+                    <li><a href="nina-news.html">Nina News</a></li>
                 </ul>
                 <a href="#" class="btn">Subscribe</a>
             </nav>
@@ -26,15 +27,51 @@
             <div class="content">
                 <h4>Hello, my name is</h4>
                 <h1>Nina Patricia M. Sapitula</h1>
-                <h3>Connect with me~</h3>
-                <ul>
-                    <li>Email: nmsapitula@up.edu.ph</li>
-                    <li>Contact Number: +63 917 529 3241</li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/nina-patricia-sapitula-0959bb236/">Nina Patricia Sapitula</a></li>
-                    <li>GitHub: <a href="https://github.com/CrystalClear27">CrystalClear27</a></li>
-                </ul>
             </div>
-
         </div>
+
+        <!---Nina News Section start-->
+        <section id="nina-news" class="nina-news">
+        <h2>Latest Nina News</h2>
+        <div class="news-grid" id="newsGrid">
+            <!-- Cards will be inserted dynamically -->
+             </section>
+
+            <!-- 1️⃣ Load the data file -->
+            <script src="news.js"></script>
+
+            <!-- 2️⃣ Load the rendering logic -->
+            <script>
+            // Wait until the DOM is ready
+            document.addEventListener("DOMContentLoaded", () => {
+                const grid = document.getElementById("newsGrid");
+
+                // Sort by date (newest first)
+                const sorted = newsData
+                .slice() // make a copy
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Limit to 2
+                const latestTwo = sorted.slice(0, 2);
+
+                // Render
+                latestTwo.forEach(item => {
+                const card = document.createElement("div");
+                card.classList.add("news-card");
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p><strong>${item.date}</strong></p>
+                    <p>${item.excerpt}</p>
+                    <a href="${item.link}">Read more →</a>
+                `;
+                grid.appendChild(card);
+                });
+            });
+            </script>
+        </div>
+
+
+
     </body>
 </html>
